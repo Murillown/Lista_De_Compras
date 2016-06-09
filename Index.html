@@ -1,0 +1,81 @@
+﻿<!DOCTYPE html>
+<html>
+<script src="http://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
+<head>
+    <title>Trabalho AngularJS Navarro</title>
+	<meta charset="utf-8" />
+    <link href="Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="Content/bootstrap-theme.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="http://www.w3schools.com/lib/w3.css">
+    <script src="scripts/angular.min.js"></script>
+    
+</head>
+<body>
+
+    <script>
+var app = angular.module("ListaDeCompras", []);
+app.controller("ListaController", function($scope) {
+    $scope.products = ["Suco", "Biscoito", "Pão"];
+    $scope.addItem = function () {
+        $scope.errortext = "";
+        if (!$scope.addMe) {return;}
+        if ($scope.products.indexOf($scope.addMe) == -1) {
+            $scope.products.push($scope.addMe);
+        } else {
+            $scope.errortext = "Este nome já está na lista";
+        }
+    }
+    $scope.removeItem = function (x) {
+        $scope.errortext = "";
+        $scope.products.splice(x, 1);
+    }
+});
+    </script>
+
+    <div ng-app="ListaDeCompras" ng-cloak ng-controller="ListaController" class="w3-card-2 w3-margin" style="max-width:400px;">
+        <header class="w3-container w3-light-grey w3-padding-hor-16">
+            <h3>Lista de Compras</h3>
+        </header>
+        <ul class="w3-ul">
+            <li ng-repeat="x in products" class="w3-padding-hor-16">{{x}}<span ng-click="removeItem($index)" style="cursor:pointer;" class="w3-right w3-margin-right">×</span></li>
+        </ul>
+        <div class="w3-container w3-light-grey w3-padding-hor-16">
+            <div class="w3-row w3-margin-top">
+                <div class="w3-col s10">
+                    <input placeholder="Escreva Aqui" ng-model="addMe" class="w3-input w3-border w3-padding">
+                </div>
+                <div class="w3-col s2">
+                    <button ng-click="addItem()" class="w3-btn w3-padding w3-green">Add</button>
+                </div>
+            </div>
+            <p class="w3-padding-left w3-text-red">{{errortext}}</p>
+        </div>
+    </div>
+
+    <!-- parte bugada que não deu tempo de corrigir.... Botão para mostrar nome dos alunos apos clicar
+    <div ng-app="ListaDeCompras" ng-controller="ListaController">
+
+        <button ng-click="Func()">Clique Aqui!</button>
+
+        <div ng-show="mostrar">
+            <h1>Alunos</h1>
+            <div>Murilo Martins, 541168</div>
+            <div>Robson Kumagai, 538343</div>
+        </div>
+
+    </div>
+    <script>
+var app = angular.module('app', []);
+app.controller('ListaController', function($scope) {
+    $scope.mostrar = false;
+    $scope.Func = function() {
+        $scope.mostrar = !$scope.mostrar;
+    }
+});
+    </script>
+
+    <p>Clique para exibir/ocultar nome dos alunos.</p>
+    -->
+</body>
+
+</html>
